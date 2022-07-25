@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown Image / link maker</title>
+    <style>
+        body {
+            margin: 0px;
+            padding: 0px;
+            border: 0px;
+        }
+
+        #contents,
+        #results,
+        #back,
+        #reset {
+            font-family: sans-serif;
+            font-size: 1.2rem;
+            margin-left: 20px;
+        }
+
+        p,
+        .questionChoice {
+            margin-bottom: 10px;
+        }
+
+        #back,
+        #reset {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="contents">
+        <p>Markdown image / link generator</p>
+        <div class="questionChoice">
+            <input type="checkbox" id="imageToggle" name="imageToggle" />
+            <label for="imageToggle">Image? (vs link)</label>
+        </div>
+        <div class="questionChoice">
+            <label for="altTextDescription">Link display text or image alt text:</label>
+            <input type="text" id="altTextDescription" name="altTextDescription" />
+        </div>
+        <div class="questionChoice">
+            <label for="imageLinkURL">Link (or image url):</label>
+            <input type="text" id="imageLinkURL" name="imageLinkURL" />
+        </div>
+        <div class="questionChoice">
+            <button onclick="run()">Submit</button>
+        </div>
+    </div>
+    <p id="results"></p>
+    <button id="back" onclick="back()">Back</button>
+    <br />
+    <button id="reset" onclick="reset()">Reset</button>
+
+    <script>
+        function run() {
+
+            var imageToggle = document.querySelector('#imageToggle').checked;
+            var altTextDescription = document.querySelector('#altTextDescription').value;
+            var linkurl = document.querySelector('#imageLinkURL').value;
+
+            if (imageToggle) { imageToggle = '!' } else { imageToggle = '' };
+
+            var result = imageToggle + '[' + altTextDescription + '](' + linkurl + ')';
+
+            document.querySelector('#contents').style.display = 'none';
+            document.querySelector('#back').style.display = 'block';
+            document.querySelector('#reset').style.display = 'block';
+            document.querySelector('#results').innerHTML = result;
+
+        }//run()
+
+        function back() {
+            document.querySelector('#contents').style.display = 'block';
+            document.querySelector('#back').style.display = 'none';
+            document.querySelector('#reset').style.display = 'none';
+        }//back()
+
+        function reset() {
+            document.querySelector('#contents').style.display = 'block';
+            document.querySelector('#back').style.display = 'none';
+            document.querySelector('#reset').style.display = 'none';
+
+            document.querySelector('#imageToggle').checked = false;
+            document.querySelector('#altTextDescription').value = '';
+            document.querySelector('#imageLinkURL').value = '';
+            document.querySelector('#results').innerHTML = '';
+
+        }//reset()
+
+    </script>
+
+</body>
+
+</html>
